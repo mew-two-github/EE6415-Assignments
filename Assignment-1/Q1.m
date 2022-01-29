@@ -4,9 +4,9 @@ f1 = @(x,y,beta)(y);
 f2 = @(x,y,beta)(-x - beta*y);
 
 %% Declare 2-D mesh
-lim = 5;
-x = linspace(-lim,lim,9);
-y = linspace(-lim,lim,9);
+lim = 1;
+x = linspace(-lim,lim,25);
+y = linspace(-lim,lim,25);
 [X,Y] = meshgrid(x,y);
 %% Case i
 beta = 2;
@@ -29,8 +29,6 @@ end
 quiver(X,Y,U,V,0.75)
 xlabel('x'); ylabel('y');
 title('Case i: \beta = 2');
-% Equilibrium point is origin
-% Stable; perturbation from origin causes it to return back
 %% Case ii
 beta = 0;
 % Storing derivatives
@@ -53,8 +51,7 @@ figure;
 % Use quiver to plot; S = 0.75 to ensure arrows don't intersect
 quiver(X,Y,U,V,0.75)
 xlabel('x'); ylabel('y');
-title('Case i: \beta = 0');
-% Unstable; perturbation from origin causes it to go away from it
+title('Case ii: \beta = 0');
 %% Case iii
 beta = -2;
 % Storing derivatives
@@ -77,5 +74,4 @@ figure;
 % Use quiver to plot; S = 0.75 to ensure arrows don't intersect
 quiver(X,Y,U,V,0.75)
 xlabel('x'); ylabel('y');
-title('Case i: \beta = -2');
-% Unstable, slight perturbation from origin takes it away from it
+title('Case iii: \beta = -2');

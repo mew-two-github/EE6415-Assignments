@@ -4,10 +4,10 @@ function [X,Y,U,V] = derivatives(lim,N,f1,f2)
     % lim - limits of the x,y grid of the plot. derivatives will be
     % evaluated at points between -lim to +lim
     % 
-    % N - number of points on axis
+    % N - number of points on each axis
     %
-    % f1 - x derivative
-    % f2 - y derivative
+    % f1 - x derivative (xdot)
+    % f2 - y derivative (ydot)
     % ---------------------------------------------------------------------
     % Generate mesh
     x = linspace(-lim,lim,N);
