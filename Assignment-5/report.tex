@@ -1,0 +1,310 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+\usepackage[section]{placeins}
+\usepackage{listings}
+\usepackage{tabto}
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{float}
+
+\title{Assignment-5}
+\author{S.Vishal CH18B020}
+
+\begin{document}
+\maketitle
+\section*{Question-1}
+\subsection*{Part a)}
+\begin{align}
+    d(T(f),T(g)) &= max_{x1[0,1]} |T(f) - T(g)| \\
+    &= max_{t1[0,1]} |\int_0^t(f(s) - g(s))\,ds|\\
+    &\leq max_{t1[0,1]} \int_0^t|f(s) - g(s)|\,ds  \textrm{took mod inside the integral}
+\end{align}
+Let $d(f,g) = max_{x1[0,1]} |f(x) - g(x)| = |f(x1) - g(x1)|$ and since the term inside the integral is always positive, we can do the integration upto its upper limit.
+\begin{align}
+    \implies d(T(f),T(g)) &\leq \int_0^1|f(x1) - g(x1)|\,ds \label{1a}\\
+    \implies d(T(f),T(g)) &\leq d(f,g)*1 \\
+    \implies d(T(f),T(g)) &\leq d(f,g)
+\end{align}
+So a simple example that will hold the equality is f = 1 and g = 0. LHS and RHS both will be equal to 1. Therefore T is not a contraction.
+
+\subsection*{Part b)}
+In equation \ref{1a}, if we replace 1 with 0.5,
+\begin{align}
+    \implies d(T(f),T(g)) &\leq \int_0^0.5|f(x1) - g(x1)|\,ds \\
+    \implies d(T(f),T(g)) &\leq 0.5*d(f,g) \\
+\end{align}
+So, T is a contraction with $\rho = 0.5$
+
+
+\section*{Question-2}
+\subsection*{Part a)}
+\begin{align}
+    |f(x) - f(y)| &= |\frac{1}{1+x} - \frac{1}{1+y}| \\
+    \implies |f(x) - f(y)| &\leq |\frac{y-x}{(1+x)(1+y)}| \\
+    \implies |f(x) - f(y)| &\leq d(x,y)\frac{1}{(1+x)(1+y)} (\because x,y \geq 0) \\
+    \implies \rho &= max_{x,y} \frac{1}{(1+x)(1+y)}
+\end{align}
+We note that we get $\rho = 1$ as the solution. So f is not a contraction.
+
+\subsection*{Part b)}
+\begin{align}
+    f(x^*) &= x^* \\
+    \implies \frac{1}{1 + x^*} &= x^* \\
+    \implies (x^*)^2 + x^* - 1 &= 0 \\
+     \implies x^* &= \frac{-1\pm\sqrt{5}}{2}
+\end{align}
+Since, $x^* \in [0,1]$, we have a unique fixed point, $x^* = \frac{-1+\sqrt{5}}{2}$
+
+
+\section*{Question-3}
+For locally Lipschitz we just need bounded derivative locally. For globally Lipschitz, the derivative should be bounded, ie shouldnt keep increasing to infinity or decrease to -infinity.
+\subsection*{Part a)}
+\subsection*{Continuously differentiable}
+\begin{align}
+    f(x)= 
+\begin{cases}
+    x^2\sin\frac{1}{x},& x\neq 0\\
+    0,  & x=0
+\end{cases}
+\end{align}
+So at $x\neq0$,
+$f'(x) = 2x\sin\frac{1}{x} - \cos\frac{1}{x}$
+We see that the left hand derivative as well as the right hand derivative do not exist at $\lim_{x\to0}f'(x)$. So the function is not continuously differentiable.
+\subsection*{Locally Lipschitz}
+At all points other than x = 0, the function is locally Lipschitz, because the derivative is bounded and we can always fix L = max f'(x) $x \in B(x_0, \epsilon)$, so that,
+\begin{equation*}
+    \|f(x) - f(y)\| \leq L\|x-y\| \textrm{ where x,y in } B(x_0, \epsilon)
+\end{equation*}
+ 
+\subsection*{Continuous}
+Each pieces are continuous functions and at x = 0,
+$\lim_{x\to0^+} x^2\sin\frac{1}{x} = \lim_{x\to0^-} x^2\sin\frac{1}{x} = 0 = f(0)$. So the function is continuous.
+
+\subsection*{Globally Lipschitz}
+We see that the derivative keeps increasing as x keeps increasing so the function is not globally Lipschitz.
+
+\subsection*{Part b)}
+\subsection*{Continuously differentiable}
+\begin{align}
+    f(x)= 
+\begin{cases}
+    \frac{x^3}{3} + x,& x\geq 0\\
+    \frac{x^3}{3} - x,  & x\leq0
+\end{cases}
+\end{align}
+So at $x\neq0$,
+$f'(x) = \begin{cases}
+    x^2 + 1,& x\geq 0\\
+    x^2 - 1,  & x\leq0
+\end{cases}$
+We see that the left hand derivative and the right hand derivative do not match around x = 0 (-1 and 1). So the function is not continuously differentiable.
+\subsection*{Locally Lipschitz}
+At all points other than x = 0, the function is locally Lipschitz, because the derivative is bounded and we can always fix L = max f'(x) $x \in B(x_0, \epsilon)$, so that,
+\begin{equation*}
+    \|f(x) - f(y)\| \leq L\|x-y\| \textrm{ where x,y in } B(x_0, \epsilon)
+\end{equation*}
+ 
+\subsection*{Continuous}
+$\frac{x^3}{3}$ and $|x|$ are continuous functions. So sum of continuous functions is also continuous. Therefore, the function is continuous.
+
+\subsection*{Globally Lipschitz}
+We see that the derivative keeps increasing as x keeps increasing so the function is not globally Lipschitz.
+
+\subsection*{Part c)}
+\subsection*{Continuously differentiable}
+\begin{align}
+    f(x) = \begin{bmatrix}
+   -x_1+a|x_2| \\
+   -(a+b)x_1+bx_1^2-x_1x_2
+\end{bmatrix}
+\end{align}
+So at $x\neq0$,
+$f'(x) = 2x\sin\frac{1}{x} - \cos\frac{1}{x}$
+We see that $\frac{\partial f_1}{\partial x_2}$ is not continuously differentiable. So the function is not continuously differentiable.
+\subsection*{Locally Lipschitz}
+At all points other than x = 0, the function is locally Lipschitz, because the derivative is bounded and we can always fix L = max f'(x) $x \in B(x_0, \epsilon)$, so that,
+\begin{equation*}
+    \|f(x) - f(y)\| \leq L\|x-y\| \textrm{ where x,y in } B(x_0, \epsilon)
+\end{equation*}
+ 
+\subsection*{Continuous}
+$f_2$ is obviously a continous function. $f_1$ is also continous, because as shown earlier, $|x|$ is a continous function. So the function f is continuous.
+
+\subsection*{Globally Lipschitz}
+\begin{align}
+    \frac{\partial f_2}{x_1} &= 2bx_1 - (a+b) - x_2 \\
+    \frac{\partial f_2}{x_2} &= - x_1
+\end{align}
+We see that the derivatives of $f_2$ are not globally bounded, so the function is not globally Lipschitz. 
+
+
+\section*{Question-4}
+Holder's inequality:
+\begin{align}
+    \sum\limits_{i=1}^n |a_i||b_i|\leq \left(\sum\limits_{i=1}^n|a_i|^r\right)^{\frac{1}{r}}\left(\sum\limits_{i=1}^n|b_i|^{\frac{r}{r-1}}\right)^{1-\frac{1}{r}} 
+\end{align}
+By applying holder's inequality where b is unit vector and $a \in R^n$, one obtains, the ratio of 2 p-norms as bounded
+So there exists $c_1$, $c_2$, such that,
+\begin{align}
+    c_1\|x\|_\beta \leq \|x\|_\alpha \leq c_2\|x\|_\beta
+\end{align}
+If f is Lipschitz in $\|\|_{\alpha}$,
+\begin{align*}
+    \|f(x) - f(y)\|_\alpha &\leq L\|x-y\|_\alpha \\
+    \implies c_1\|f(x) - f(y)\|_\beta 
+    &\leq L\|x-y\|_\alpha  \\
+    \implies c_1\|f(x) - f(y)\|_\beta 
+    &\leq Lc_2\|x-y\|_\beta \\
+    \implies \|f(x) - f(y)\|_\beta 
+    &\leq \frac{Lc_2}{c_1}\|x-y\|_\beta
+\end{align*}
+Let $k_1 = \frac{1}{c_2}$ and $k_2 = \frac{1}{c_1}$
+If f is Lipschitz in $\|\|_{\beta}$,
+\begin{align*}
+    \|f(x) - f(y)\|_\beta &\leq L\|x-y\|_\beta  \\
+    \implies k_1\|f(x) - f(y)\|_\alpha
+    &\leq L\|x-y\|_\beta \\
+    \implies k_1\|f(x) - f(y)\|_\alpha
+    &\leq Lk_2\|x-y\|_\alpha \\
+    \implies \|f(x) - f(y)\|_\alpha 
+    &\leq \frac{Lk_2}{k_1}\|x-y\|_\alpha
+\end{align*}
+So f is Lipschitz in $\|\|_\alpha$ also with $L_\alpha = L_\beta\frac{k_2}{k_1}$
+So f is Lipschitz in $\|\|_\alpha$ iff it is Lipschitz in $\|\|_\beta$. Hence proved.
+
+
+\section*{Question-5}
+% \begin{align*}
+%     \dot{u}(t) &\leq \beta(t)u(t) \\
+%     \textrm{Integrating wrt t} \\
+%     u(t) - u(a) &\leq \int_a^t \beta(s)u(s)\,ds \\
+%         \textrm{Integrating by parts,} \\
+%     \implies u(t) - u(a) &\leq u(s)\int  \beta(s)\,ds |_{s=a}^{s=t} - \int_a^t\beta(s)\dot{u(s)}\,ds  \\
+%     \implies 2(u(t)-u(a)) &\leq u(t)ln(v(t)) - u(a)ln(v(a)) \\
+% \end{align*}
+Let $z(t) = \int_a^t \beta(s)u(s) \geq u(t) - u(a)\,ds$ and $\alpha(t) = z(t) + u(a) - u(t) $ \\
+$\dot{z}(t) = \beta(t)u(t) = \beta(t)\alpha(t) + \beta(t)u(a) - \beta(t)\alpha(t)$
+\begin{align*}
+    z(a) &= 0 \\
+    z(t) &= \int_a^t exp(\int_s^t\beta(\tau)\,d\tau)(\beta(s)*u(a) - \beta(s))*\alpha(s)   \,ds
+\end{align*}
+Second term is non negative so,
+\begin{align*}
+    z(t) \leq \int_a^t exp(\int_s^t\beta(\tau)\,d\tau)(\beta(s)*u(a))\,ds
+\end{align*}
+We note that,
+\begin{align*}
+    \int_a^t \beta(s)exp(\int_s^t\beta(\tau)\,d\tau)\,ds &= - \int_a^t \frac{d}{ds}exp(\int_s^t\beta(\tau)\,d\tau)\, \\
+    &= - 1 + exp(\int_a^t\beta(\tau)\,d\tau)
+\end{align*}
+So, 
+\begin{align*}
+    u(t) - u(a) \leq -u(a) + u(a)exp(\int_a^t\beta(\tau)\,d\tau)
+    \implies u(t) \leq u(a)exp(\int_a^t\beta(s)\,ds)
+\end{align*}
+
+
+\section*{Question-6}
+\subsection*{Part a)}
+\begin{align*}
+    \dot{x} \leq \|\dot{x}\| \leq k_1 + k_2 \|x\| \\
+    x &\leq x_0 + k_1(t-t_0) + \int_{t{_0}}^t\|x(s)\|\,ds \\
+    \textrm{Apply mod and use triangle inequality in rhs} \\
+    \|x\| &\leq |x_0| + k_1(t-t_0) + \int_{t_0}^t\|x(s)\|\,ds \\
+\end{align*}
+Use Groman Bellman taking into account the constant term for the integral
+\begin{align*}
+    \|x(t)\| &\leq \|x_0\| + k_1(t-t_0) + k_2\int_{t_0}^{t} (\|x_0\|+k_1(s-t_0))\exp(k_2(t-s))\,ds \\
+    \textrm{Integrating by parts and simplifying,} \\
+    \|x(t)\| &\leq \|x_0\|exp(k_2(t-t_0)) + \frac{k_1}{k_2}(exp(k_2(t-t_0))-1),\textrm{    }\forall t\ge t_0
+\end{align*}
+
+\subsection*{Part b)}
+We see that the RHS doesn't have finite escape time and goes to infinity only when $lim_{t\to\infty}$. Since the solution for x(t) is bounded by RHS, it won't be able to blow to $\infty$ in finite time. So it does not have finite escape time.
+
+
+\section*{Question-7}
+From question-9 we find that the solution for all $t \geq 0$ is bounded in a compact set (the function in RHS is bounded for all values of t). We also see that function $\dot{x}$ is continuous, and locally Lipschitz in R (because derivative of $\dot{x}$ is continuous). Therefore, the system must have a unique solution for all t $\geq 0$ .
+
+
+\section*{Question-8}
+(From Hassan Khalil Appendix C.2) \\
+Consider $\dot{z} = f(t,z) + \lambda, z(t_0) = u_0$ \\
+where $\lambda>0$. On any compact interval $[t_0,t_1]$ from theorem 3.5, we find that for any $\epsilon>0$, there exists $\delta>0$ such that if $\lambda<\delta$ then $z(t,\lambda)$ has a unique solution defined in that interval and,
+\begin{equation}
+    |z(t,\lambda)-u(t)| < \epsilon \label{C6}
+\end{equation}
+Claim 1: $v(t) \leq z(t,\lambda) \forall t \in [t_0,t_1]$ \\
+If it were not true, there would be times $a,b \in (t_0,t_1]$ such that $v(a) = z(a,\lambda)$ and $v(t) > z(t,\lambda) $ for $a<t\leq b$. \\
+Consequently,
+\begin{align*}
+    v(t) - v(a) &> z(t,\lambda) -  z(a,\lambda) \\
+    D^+v(a) &\leq \dot{z(a,\lambda)} = f(a,z(a,\lambda)) + \lambda > f(a,v(a))
+\end{align*}
+which contradicts the inequality $D^+v(a) \leq f(t,v(t))$ \\
+Claim 2: $v(t)\leq u(t) \forall t \in [t_0,t_1]$ \\
+If the statement is not true, then, there would exist $a\in(t_0,t_1]$ such that $v(a)>u(a)$. Taking $\epsilon = [v(a) - u(a)]/2$ and using eqn \ref{C6},
+\begin{equation}
+    v(a) - z(a,\lambda) = v(a) - u(a) + u(a) - z(a,\lambda) \geq \epsilon 
+\end{equation}
+This contradicts the statement of Claim-1. \\
+Thus, we have shown $v(t)\leq u(t) \forall t \in [t_0,t_1]$. Since this is true on every compact interval we conclude that it holds for all $t\geq t_0$. If it were not the case, let $T<\infty$ be the first time the inequality is violated. \\
+We have $v(t)\leq u(t)\forall [t_0,T)$ and, by continuity v(t) = u(T). Consequently, we can extend the inequality to the interval $[T,T+\Delta]$ for some $\Delta>0$ which contradicts the claim that T is the first time the inequality is violated.
+
+
+\section*{Question-9}
+By comparing the required statement with the comparison lemma, we can intuitively guess that V should be of the form, $V = \sqrt{x_1^2 + x_2^2}$ \\
+\begin{align*}
+    \dot{V} &= \frac{x_1\dot{x_1} + x_2\dot{x_2} }{\sqrt{x_1^2 + x_2^2}} \\
+    \implies \dot{V} &= \frac{1}{\sqrt{x_1^2 + x_2^2}}(-x_1^2-x_2^2+\frac{2x_1x_2}{1+x_2^2} + \frac{2x_1x_2}{1+x_1^2}) \\
+\end{align*}
+Note that 
+\begin{align*}
+    \frac{2x_1x_2}{1+x_2^2}  &\leq 2x_1\frac{|x_2|}{1+x_2^2}
+    &\leq |x_1|
+\end{align*}
+So,
+\begin{align}
+    \dot{V} &\leq \frac{1}{\sqrt{x_1^2 + x_2^2}}(-x_1^2-x_2^2+|x_1|+|x_2|) \\
+    \implies \dot{V} &\leq -V + \sqrt{2}
+\end{align}
+(Use AM-GM after expanding sqrt to get the second term)
+Define,
+\begin{equation}
+    \dot{u} = -u + \sqrt{2}
+\end{equation}
+So u(t) is if $u(0) = \|x(0)\|_2$,
+\begin{align*}
+    u(t) &= e^{-t}\|x(0)\|_2 + \sqrt{2}(1-e^{-t})
+\end{align*}
+By using comparison lemma,
+\begin{align*}
+    V(t) &\leq u(t) \\
+    V(t) &\leq e^{-t}\|x(0)\|_2 + \sqrt{2}(1-e^{-t})
+\end{align*}
+
+
+\section*{References}
+\begin{itemize}
+    \item Students discussed with:
+    \begin{enumerate}
+        \item Arvind Ragghav ME18B086
+        \item Karthik Srinivasan ME18B149
+    \end{enumerate}
+    \item Course notes used:
+    \begin{enumerate}
+        \item Class notes
+    \end{enumerate}
+    \item Hassan Khalil
+\end{itemize}
+\end{document}
