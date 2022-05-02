@@ -1,0 +1,23 @@
+% level 4 of improvements
+figure(4);
+plot(x,y1,"b-", x,y2,"r-.", "linewidth", 2);
+set(gca, "fontsize", 15, "fontweight","bold"); % gca: get current axis
+
+% change ticks on the x-axis. 0 to 2pi with an interval of pi/4
+set(gca,"XTick",0:pi/2:2*pi)
+
+% label ticks in terms of pi
+set(gca,"XtickLabel",{"0","pi/2","pi","3pi/2","2pi"});
+
+hl = legend("sin\theta", "sin 2\theta");
+set(hl,"fontweight","bold");
+
+title("Sample plots in Matlab", "fontsize", 15,"fontweight","bold");
+xlabel("\theta (radians)", "fontsize", 15,"fontweight","bold");
+ylabel("sin\theta, sin 2\theta", "fontsize", 15, "fontweight","bold");
+grid on;
+
+
+print -depsc2 sample_plot4.eps % export to EPS, editable in EPS Illustrator
+print -djpeg sample_plot4.jpg % export to 24-bit JPG format
+saveas(gcf,"sample_plot4.fig","fig"); % save as Matlab editable .fig file
