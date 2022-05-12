@@ -31,5 +31,5 @@ function dotx = de(x)
     dotx(1) = x(2);
     dotx(2) = - x(1) - 2*x(2) ; 
     dotx(3) = x(4);
-    dotx(4) = -2*x(2);
+    dotx(4) = -2*x(2) -x(1) -cos(x(3)) ;
 end
